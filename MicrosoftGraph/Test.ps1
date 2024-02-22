@@ -1,0 +1,1 @@
+Invoke-RestMethod -Uri 'https://prime365team.azurewebsites.net/api/Get-WelcomeEmalUsers?code=o6ua-lp0gAWKaUn-gMWAFxVxS9uDBhs40WKkzEzKL73FAzFu0JjtMA==' -Method Get -Headers @{DaysAgo = 1}

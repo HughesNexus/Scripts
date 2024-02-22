@@ -1,0 +1,137 @@
+CREATE PROCEDURE UpdateAdUser
+    @SamAccountNameToUpdate NVARCHAR(50),
+    -- Add parameters for other fields you want to update
+    @UserPrincipalName NVARCHAR(MAX),
+    @Name NVARCHAR(MAX),
+    @GivenName NVARCHAR(MAX),
+    @SurName NVARCHAR(MAX),
+    @DisplayName NVARCHAR(MAX),
+    @Department NVARCHAR(MAX),
+    @Division NVARCHAR(MAX),
+    @EmployeeNumber NVARCHAR(MAX),
+    @EmployeeType NVARCHAR(MAX),
+    @EmployeeID NVARCHAR(MAX),
+    @Company NVARCHAR(MAX),
+    @Organization NVARCHAR(MAX),
+    @Office NVARCHAR(MAX),
+    @Title NVARCHAR(MAX),
+    @StreetAddress NVARCHAR(MAX),
+    @City NVARCHAR(MAX),
+    @State NVARCHAR(MAX),
+    @PostalCode NVARCHAR(50),
+    @Country NVARCHAR(MAX),
+    @Manager NVARCHAR(MAX),
+    @Description NVARCHAR(MAX),
+    @PhysicalDeliveryOfficeName NVARCHAR(MAX),
+    @PasswordExpired BIT,
+    @PasswordLastSet DATETIME2(7),
+    @ExtensionAttribute11 NVARCHAR(MAX),
+    @ExtensionAttribute12 NVARCHAR(MAX),
+    @ExtensionAttribute13 NVARCHAR(MAX),
+    @ExtensionAttribute15 NVARCHAR(MAX)
+AS
+BEGIN
+    -- Check if the user exists
+    IF EXISTS (SELECT 1 FROM [dbo].[AllAdUsers] WHERE [SamAccountName] = @SamAccountNameToUpdate)
+    BEGIN
+        -- Update the existing user
+        UPDATE [dbo].[AllAdUsers]
+        SET
+            -- Update other fields as needed
+            [UserPrincipalName] = @UserPrincipalName,
+            [Name] = @Name,
+            [GivenName] = @GivenName,
+            [SurName] = @SurName,
+            [DisplayName] = @DisplayName,
+            [Department] = @Department,
+            [Division] = @Division,
+            [EmployeeNumber] = @EmployeeNumber,
+            [EmployeeType] = @EmployeeType,
+            [EmployeeID] = @EmployeeID,
+            [Company] = @Company,
+            [Organization] = @Organization,
+            [Office] = @Office,
+            [Title] = @Title,
+            [StreetAddress] = @StreetAddress,
+            [City] = @City,
+            [State] = @State,
+            [PostalCode] = @PostalCode,
+            [Country] = @Country,
+            [Manager] = @Manager,
+            [Description] = @Description,
+            [PhysicalDeliveryOfficeName] = @PhysicalDeliveryOfficeName,
+            [PasswordExpired] = @PasswordExpired,
+            [PasswordLastSet] = @PasswordLastSet,
+            [ExtensionAttribute11] = @ExtensionAttribute11,
+            [ExtensionAttribute12] = @ExtensionAttribute12,
+            [ExtensionAttribute13] = @ExtensionAttribute13,
+            [ExtensionAttribute15] = @ExtensionAttribute15
+        WHERE [SamAccountName] = @SamAccountNameToUpdate;
+    END
+    ELSE
+    BEGIN
+        -- Insert a new user if it doesn't exist
+        INSERT INTO [dbo].[AllAdUsers] (
+            [SamAccountName],
+            [UserPrincipalName],
+            [Name],
+            [GivenName],
+            [SurName],
+            [DisplayName],
+            [Department],
+            [Division],
+            [EmployeeNumber],
+            [EmployeeType],
+            [EmployeeID],
+            [Company],
+            [Organization],
+            [Office],
+            [Title],
+            [StreetAddress],
+            [City],
+            [State],
+            [PostalCode],
+            [Country],
+            [Manager],
+            [Description],
+            [PhysicalDeliveryOfficeName],
+            [PasswordExpired],
+            [PasswordLastSet],
+            [ExtensionAttribute11],
+            [ExtensionAttribute12],
+            [ExtensionAttribute13],
+            [ExtensionAttribute15]
+        )
+        VALUES (
+            @SamAccountNameToUpdate,
+            @UserPrincipalName,
+            @Name,
+            @GivenName,
+            @SurName,
+            @DisplayName,
+            @Department,
+            @Division,
+            @EmployeeNumber,
+            @EmployeeType,
+            @EmployeeID,
+            @Company,
+            @Organization,
+            @Office,
+            @Title,
+            @StreetAddress,
+            @City,
+            @State,
+            @PostalCode,
+            @Country,
+            @Manager,
+            @Description,
+            @PhysicalDeliveryOfficeName,
+            @PasswordExpired,
+            @PasswordLastSet,
+            @ExtensionAttribute11,
+            @ExtensionAttribute12,
+            @ExtensionAttribute13,
+            @ExtensionAttribute15
+        );
+    END
+END;
